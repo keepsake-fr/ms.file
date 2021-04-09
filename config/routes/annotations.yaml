@@ -1,0 +1,4 @@
+actions:
+    resource: ../../src/Action/
+    type: annotation
+    prefix: /storage

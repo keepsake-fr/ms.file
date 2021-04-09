@@ -1,0 +1,22 @@
+services:
+    AsyncAws\S3\S3Client:
+        arguments:
+            - region: 'fr-par'
+              accessKeyId: '%env(MINIO_ACCESS_KEY)%'
+              accessKeySecret: '%env(MINIO_SECRET_KEY)%'
+              endpoint: '%env(MINIO_ENDPOINT)%'
+              pathStyleEndpoint: true
+
+flysystem:
+    storages:
+        original.storage:
+            adapter: 'asyncaws'
+            options:
+                client: 'AsyncAws\S3\S3Client'
+                bucket: 'original'
+
+        upload.storage:
+            adapter: 'asyncaws'
+            options:
+                client: 'AsyncAws\S3\S3Client'
+                bucket: 'uploaded'

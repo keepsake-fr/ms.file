@@ -1,0 +1,21 @@
+framework:
+    messenger:
+        serializer:
+            default_serializer: messenger.transport.symfony_serializer
+            symfony_serializer:
+                format: json
+                context: { }
+
+        failure_transport: failed
+
+        transports:
+            async:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                serializer: messenger.transport.symfony_serializer
+
+            failed:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN_FAILED)%'
+                serializer: messenger.transport.symfony_serializer
+
+        routing:
+            'Storage\Message\UploadedMessage': async
